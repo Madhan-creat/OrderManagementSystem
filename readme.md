@@ -36,20 +36,20 @@ Please make sure your system has following things before setting up the project
 2. cd OrderManagementSystem
 3. npm install
 4. Open your MySqlShell and execute folowing steps in sequence
-    4.1 ```\sql``` --> this switches shell to support sql commands
-    4.2 ```\c yourlocalmysqlusearname@localost``` --> Please provide your local db user password
-    4.3 ```create database orderManagementSystemDB;``` --> Create a database
-    4.4 ```use orderManagementSystemDB;``` --> use the newly created database
+    - 4.1 ```\sql``` --> this switches shell to support sql commands
+    - 4.2 ```\c yourlocalmysqlusearname@localost``` --> Please provide your local db user password
+    - 4.3 ```create database orderManagementSystemDB;``` --> Create a database
+    - 4.4 ```use orderManagementSystemDB;``` --> use the newly created database
 5. Once we create the db, Please create all the required tables in order mentioned below
-```
-create table users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
+    ```
+    create table users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
 
-create table orders ( id INT AUTO_INCREMENT PRIMARY KEY, user_id INT, FOREIGN KEY (user_id) REFERENCES users(id));
+    create table orders ( id INT AUTO_INCREMENT PRIMARY KEY, user_id INT, FOREIGN KEY (user_id) REFERENCES users(id));
 
-create table order_items ( id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, price DECIMAL(10, 2) NOT NULL, quantity INT NOT NULL, order_id INT, FOREIGN KEY (order_id) REFERENCES orders(id));
+    create table order_items ( id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, price DECIMAL(10, 2) NOT NULL, quantity INT NOT NULL, order_id INT, FOREIGN KEY (order_id) REFERENCES orders(id));
 
-create table payments (id INT AUTO_INCREMENT PRIMARY KEY,amount DECIMAL(10, 2) NOT NULL,order_id INT,FOREIGN KEY (order_id) REFERENCES orders(id),user_id INT,FOREIGN KEY (user_id) REFERENCES users(id));
-```
+    create table payments (id INT AUTO_INCREMENT PRIMARY KEY,amount DECIMAL(10, 2) NOT NULL,order_id INT,FOREIGN KEY (order_id) REFERENCES orders(id),user_id INT,FOREIGN KEY (user_id) REFERENCES users(id));
+    ```
 6. `npm Start` ---> this runs the local server
 
 **Note: Please update your local mqsql username and password in the order_management_system\src\configs\configs.ts file as well before running the server**
